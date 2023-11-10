@@ -204,12 +204,8 @@ void movePondFirstMove(int* board, struct piece *piece, string move){
             break;
     }
 
-    board[newMove] = board[oldPosition]; // board up 1 = board down 1
+    board[newMove] = board[oldPosition];
     board[oldPosition] = 0; // current becomes nothing
-
-    // board[piece->position] current piece
-    // Ex: move = e4 -> 36
- 
 }
 
 void initialize(int* board, struct piece *whitePieces, struct piece *blackPieces){
@@ -230,6 +226,37 @@ void initialize(int* board, struct piece *whitePieces, struct piece *blackPieces
     }
 }
 
+bool isValidMove(int chessPieceType){
+    bool isBlack = false;
+    if (chessPieceType < 0){
+        isBlack = true;
+        chessPieceType *= -1;
+    }
+
+    switch(chessPieceType){
+        case 6: // King
+            
+            break;
+        case 5: // Queen
+            
+            break;
+        case 4: // Rook
+
+            break;
+        case 3: // Knight
+
+            break;
+        case 2: // Bishop
+
+            break;
+        case 1: // Pond
+
+            break;
+        
+    }
+    
+    return false;
+}
 
 int main(){
     int* board = fenToBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
