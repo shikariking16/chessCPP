@@ -226,8 +226,10 @@ void initialize(int* board, struct piece *whitePieces, struct piece *blackPieces
     }
 }
 
-bool isValidMove(int chessPieceType){
+bool isValidMove(int* board, struct piece *piece){
+    int chessPieceType = piece->type;
     bool isBlack = false;
+
     if (chessPieceType < 0){
         isBlack = true;
         chessPieceType *= -1;
@@ -252,9 +254,8 @@ bool isValidMove(int chessPieceType){
         case 1: // Pond
 
             break;
-        
     }
-    
+
     return false;
 }
 
