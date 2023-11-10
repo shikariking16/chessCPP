@@ -197,6 +197,22 @@ void movePondFirstMove(int* board, struct piece *piece, string move){
         board[newMove] = board[oldPosition]; // board up 1 = board down 1
         board[oldPosition] = 0; // current becomes nothing
         piece->position = piece->position - 8; // updates the piece position
+
+        // Black move Now
+    } else if (move[1] == '5'){
+        newMove = chessCoordinateToInt(move);
+        oldPosition = newMove - 16; // Position back two
+
+        board[newMove] = board[oldPosition]; // board up 1 = board down 1
+        board[oldPosition] = 0; // current becomes nothing
+        piece->position = piece->position + 16; // updates the piece position
+    } else if (move[1] == '6'){
+        newMove = chessCoordinateToInt(move);
+        oldPosition = newMove - 8; // Position back two
+
+        board[newMove] = board[oldPosition]; // board up 1 = board down 1
+        board[oldPosition] = 0; // current becomes nothing
+        piece->position = piece->position + 8; // updates the piece position
     }
 
     // board[piece->position] current piece
