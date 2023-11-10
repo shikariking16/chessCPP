@@ -10,3 +10,5 @@
 /Debug/
 /Release/
 output/main
+output/main.dSYM/Contents/Info.plist
+output/main.dSYM/Contents/Resources/DWARF/main
