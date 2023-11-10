@@ -226,7 +226,8 @@ void initialize(int* board, struct piece *whitePieces, struct piece *blackPieces
     }
 }
 
-bool isValidMove(int* board, struct piece *piece){
+// TODO
+bool isValidMove(int* board, struct piece *piece, int destination){
     int chessPieceType = piece->type;
     bool isBlack = false;
 
@@ -268,7 +269,7 @@ int main(){
     initialize(board, whitePieces, blackPieces);
 
     // This just moved a pond one square forward
-    struct piece tmp = whitePieces[4];
+    struct piece tmp = whitePieces[0];
     // printf("Piece: %c, Position: %s\n", typeToString(tmp.type), intToChessCoordinate(tmp.position));
     printBoard(board);
     for (int i = 0; i < 4; i++){
