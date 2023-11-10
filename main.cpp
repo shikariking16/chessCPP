@@ -182,38 +182,30 @@ void movePondFirstMove(int* board, struct piece *piece, string move){
 
     int newMove;
     int oldPosition;
+    newMove = chessCoordinateToInt(move);
 
-    if (move[1] == '4'){
-        newMove = chessCoordinateToInt(move);
-        oldPosition = newMove + 16; // Position back two
-
-        board[newMove] = board[oldPosition]; // board up 1 = board down 1
-        board[oldPosition] = 0; // current becomes nothing
-        piece->position = piece->position - 16; // updates the piece position
-    } else if (move[1] == '3'){
-        newMove = chessCoordinateToInt(move);
-        oldPosition = newMove + 8; // Position back two
-
-        board[newMove] = board[oldPosition]; // board up 1 = board down 1
-        board[oldPosition] = 0; // current becomes nothing
-        piece->position = piece->position - 8; // updates the piece position
-
-        // Black move Now
-    } else if (move[1] == '5'){
-        newMove = chessCoordinateToInt(move);
-        oldPosition = newMove - 16; // Position back two
-
-        board[newMove] = board[oldPosition]; // board up 1 = board down 1
-        board[oldPosition] = 0; // current becomes nothing
-        piece->position = piece->position + 16; // updates the piece position
-    } else if (move[1] == '6'){
-        newMove = chessCoordinateToInt(move);
-        oldPosition = newMove - 8; // Position back two
-
-        board[newMove] = board[oldPosition]; // board up 1 = board down 1
-        board[oldPosition] = 0; // current becomes nothing
-        piece->position = piece->position + 8; // updates the piece position
+    switch (move[1]){
+        case '4':
+            oldPosition = newMove + 16; // Position back two
+            piece->position = piece->position - 16; // updates the piece position
+            break;
+        case '3':
+            oldPosition = newMove + 8; // Poisition new one
+            piece->position = piece->position - 8; // updates the piece position
+            break;
+        // Black Cases
+        case '5':
+            oldPosition = newMove - 16; // Position back two
+            piece->position = piece->position + 16; // updates the piece position
+            break;
+        case '6':
+            oldPosition = newMove - 8; // Position back two
+            piece->position = piece->position + 8; // updates the piece position
+            break;
     }
+
+    board[newMove] = board[oldPosition]; // board up 1 = board down 1
+    board[oldPosition] = 0; // current becomes nothing
 
     // board[piece->position] current piece
     // Ex: move = e4 -> 36
