@@ -273,13 +273,13 @@ int main(){
     // printf("Piece: %c, Position: %s\n", typeToString(tmp.type), intToChessCoordinate(tmp.position));
     printBoard(board);
     for (int i = 0; i < 4; i++){
-    cout << "Enter a move: ";
-    string coordinate;
-    cin >> coordinate;
+        cout << "Enter a move: ";
+        string coordinate;
+        cin >> coordinate;
 
-    movePondFirstMove(board,&tmp,coordinate);
-    //printf("\nPiece: %c, Position: %s\n", typeToString(tmp.type), intToChessCoordinate(tmp.position));
-    printBoard(board);
+        movePondFirstMove(board,&tmp,coordinate);
+        //printf("\nPiece: %c, Position: %s\n", typeToString(tmp.type), intToChessCoordinate(tmp.position));
+        printBoard(board);
     }
     return 0;
 }
