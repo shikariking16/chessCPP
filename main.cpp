@@ -224,14 +224,20 @@ void moveKnight(int* board, struct piece* piece, string move){
 
     int newMove = chessCoordinateToInt(move);
     int oldPosition;
-    //int curPosition = piece->position;
-    //int diff = curPosition - newMove; // 62 f1 -> 45 f3
-
+    int diff = piece->position - newMove;
+    // printf("%d\n", piece->position - newMove);
     
-    oldPosition = newMove + 17; // Position back two
-    piece->position = piece->position - 17; // updates the piece position
-    
-
+    switch (diff){
+        case 17:
+            oldPosition = newMove + 17; // Position back two
+            piece->position = piece->position - 17; // updates the piece position
+            break;
+            
+        default:
+            oldPosition = piece->position;
+            break;
+    }
+   
     board[newMove] = board[oldPosition];
     board[oldPosition] = 0; // current becomes nothing
 
@@ -303,7 +309,7 @@ int main(){
     // printf("%c\n", typeToString(whitePieces[1].type));
 
     // This just moved a pond one square forward
-    struct piece tmp = whitePieces[12];
+    struct piece tmp = whitePieces[14];
     // printf("%c\n", typeToString(tmp.type));
     // printf("%d\n", (tmp.position));
     // printf("%d\n", isValidMove(board,&tmp,50));
