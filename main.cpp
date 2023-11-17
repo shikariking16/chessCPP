@@ -231,6 +231,8 @@ void initialize(int* board, struct piece *whitePieces, struct piece *blackPieces
 bool isValidMove(int* board, struct piece *piece, int destination){
     int chessPieceType = piece->type;
     bool isBlack = false;
+    int positionDifference = piece->position - destination;
+
 
     if (chessPieceType < 0){
         isBlack = true;
@@ -239,7 +241,9 @@ bool isValidMove(int* board, struct piece *piece, int destination){
 
     switch(chessPieceType){
         case 6: // King
-            
+            if (positionDifference >= -9 && positionDifference <= 9) {
+                return true;
+            }
             break;
         case 5: // Queen
             
@@ -273,15 +277,18 @@ int main(){
     // printf("%c\n", typeToString(whitePieces[1].type));
 
     // This just moved a pond one square forward
-    struct piece tmp = whitePieces[0];
-    printBoard(board);
-    for (int i = 0; i < 4; i++){
-        cout << "Enter a move: ";
-        string coordinate;
-        cin >> coordinate;
+    struct piece tmp = whitePieces[12];
+    printf("%c\n", typeToString(tmp.type));
+    printf("%d\n", (tmp.position));
+    printf("%d\n", isValidMove(board,&tmp,50));
 
-        movePondFirstMove(board,&tmp,coordinate);
-        printBoard(board);
-    }
+    // for (int i = 0; i < 4; i++){
+    //     cout << "Enter a move: ";
+    //     string coordinate;
+    //     cin >> coordinate;
+
+    //     movePondFirstMove(board,&tmp,coordinate);
+    //     printBoard(board);
+    // }
     return 0;
 }
