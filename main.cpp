@@ -216,17 +216,24 @@ void movePiece(int* board, struct piece* piece, string move){
 void moveKnight(int* board, struct piece* piece, string move){
     // Reverse all the nums
     // knight possible moves
-    // knight two up -16 and then one left -15 or right -17
+    // knight two up -16 and then one right -15 or left -17
     // knight two down +16 and then left +17 or right +15
     // knight two right -2 and then up -8 or down +8
     // knight two left +2 and then up -8 or down +8
     // First test Nf3 -> Knight to f3
 
-    int newMove;
+    int newMove = chessCoordinateToInt(move);
     int oldPosition;
-    newMove = chessCoordinateToInt(move);
+    //int curPosition = piece->position;
+    //int diff = curPosition - newMove; // 62 f1 -> 45 f3
 
+    
+    oldPosition = newMove + 17; // Position back two
+    piece->position = piece->position - 17; // updates the piece position
+    
 
+    board[newMove] = board[oldPosition];
+    board[oldPosition] = 0; // current becomes nothing
 
 }
 
@@ -301,9 +308,9 @@ int main(){
     // printf("%d\n", (tmp.position));
     // printf("%d\n", isValidMove(board,&tmp,50));
 
-    printf("%d\n", chessCoordinateToInt("f1"));
-
-    // printBoard(board);
+    //printf("%d\n", chessCoordinateToInt("g1"));
+    moveKnight(board, &tmp, "f3");
+    printBoard(board);
     // for (int i = 0; i < 4; i++){
     //     cout << "Enter a move: ";
     //     string coordinate;
