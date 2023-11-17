@@ -5,6 +5,7 @@ using namespace std;
 struct piece{
     int type;
     int position;
+    bool alive;
 };
 
 void hide(){
@@ -268,9 +269,11 @@ int main(){
 
     initialize(board, whitePieces, blackPieces);
 
+
+    // printf("%c\n", typeToString(whitePieces[1].type));
+
     // This just moved a pond one square forward
     struct piece tmp = whitePieces[0];
-    // printf("Piece: %c, Position: %s\n", typeToString(tmp.type), intToChessCoordinate(tmp.position));
     printBoard(board);
     for (int i = 0; i < 4; i++){
         cout << "Enter a move: ";
@@ -278,7 +281,6 @@ int main(){
         cin >> coordinate;
 
         movePondFirstMove(board,&tmp,coordinate);
-        //printf("\nPiece: %c, Position: %s\n", typeToString(tmp.type), intToChessCoordinate(tmp.position));
         printBoard(board);
     }
     return 0;
