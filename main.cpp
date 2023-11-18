@@ -255,6 +255,7 @@ void moveBishop(int* board, struct piece *piece, string move){
     int newMove = chessCoordinateToInt(move);
     int oldPosition;
     int diff = piece->position - newMove;
+    
     printf("%d\n", diff);
     // checks if it is a valid move
     if (diff % 9 == 0 || diff % 7 == 0){
@@ -333,8 +334,8 @@ int main(){
 
     struct piece tmp = whitePieces[10]; 
     struct piece tmp2 = blackPieces[2];
-
-    moveBishop(board, &tmp2, "e5");
+    printPieceInfo(&tmp2);
+    moveBishop(board, &tmp2, "f5");
     printBoard(board);
 
 
