@@ -334,10 +334,10 @@ int main(){
 
     struct piece tmp = whitePieces[10]; 
     struct piece tmp2 = blackPieces[2];
-    printPieceInfo(&tmp2);
-    moveBishop(board, &tmp2, "f5");
+    
     printBoard(board);
 
-
+    // Nf3
+    
     return 0;
 }
