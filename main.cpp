@@ -95,8 +95,9 @@ char typeToString(int type){
 
 }
 
-void printTypeToString(struct piece *piece){
-    printf("%c\n", typeToString(piece->type));
+void printPieceInfo(struct piece *piece){
+    printf("Type: %c\n", typeToString(piece->type));
+    printf("Coordinate: %s\n", intToChessCoordinate(piece->position));
 }
 
 int* fenToBoard(const string fen) {
@@ -253,15 +254,17 @@ void moveKnight(int* board, struct piece* piece, string move){
 }
 
 void moveRook(int* board, struct piece* piece, string move){
-
+    // move = f3, a2 etc
     int newMove = chessCoordinateToInt(move);
     int oldPosition;
     int diff = piece->position - newMove;
+    string curPositionInt = intToChessCoordinate(piece->position);
     
     // checks if it is a valid move
-    if ((diff < 0)&& newMove > 0 && newMove < 64){
-        oldPosition = newMove + diff; // Position back two
-        piece->position = piece->position - diff; // updates the piece position
+    // Just check if the file and rank are the same etc
+    if ((move[0] == curPositionInt[0]) || (move[1] == curPositionInt[1])){
+        oldPosition = piece->position; // find the old position
+        piece->position = chessCoordinateToInt(move); // updates the piece position
         board[newMove] = board[oldPosition];
         board[oldPosition] = 0; // current becomes nothing
     }else{
@@ -333,9 +336,10 @@ int main(){
 
     initialize(board, whitePieces, blackPieces);
 
-    struct piece tmp = whitePieces[9]; 
+    struct piece tmp = whitePieces[8]; 
     struct piece tmp2 = blackPieces[0];
-    printf("%d\n", tmp2.position);
+
+    moveRook(board, &tmp, "d4");
     printBoard(board);
 
     return 0;
