@@ -272,6 +272,22 @@ void moveRook(int* board, struct piece* piece, string move){
     }
 }
 
+void moveBishop(int* board, struct piece* piece, string move){
+    int newMove = chessCoordinateToInt(move);
+    int oldPosition;
+    int diff = piece->position - newMove;
+    
+    // checks if it is a valid move
+    if (diff % 9 == 0 || diff % 7 == 0){
+        oldPosition = newMove + diff; // Position back two
+        piece->position = piece->position - diff; // updates the piece position
+        board[newMove] = board[oldPosition];
+        board[oldPosition] = 0; // current becomes nothing
+    }else{
+        printf("Invalid Move\n");
+    }
+}
+
 void initialize(int* board, struct piece *whitePieces, struct piece *blackPieces){
     // Initialize the Pieces array with the positions and types 
     int whitePieceCount = 0;
@@ -336,10 +352,9 @@ int main(){
 
     initialize(board, whitePieces, blackPieces);
 
-    struct piece tmp = whitePieces[8]; 
+    struct piece tmp = whitePieces[10]; 
     struct piece tmp2 = blackPieces[0];
 
-    moveRook(board, &tmp, "d4");
     printBoard(board);
 
     return 0;
