@@ -175,47 +175,26 @@ void printBoard(int* board) {
     printf("    A   B   C   D   E   F   G   H\n");
 }
 
-void movePondFirstMove(int* board, struct piece *piece, string move){
+void movePond(int* board, struct piece *piece, string move){
 
-    int newMove;
+    int newMove = chessCoordinateToInt(move);
     int oldPosition;
-    newMove = chessCoordinateToInt(move);
-
-    switch (move[1]){
-        case '4':
-            oldPosition = newMove + 16; // Position back two
-            piece->position = piece->position - 16; // updates the piece position
-            break;
-        case '3':
-            oldPosition = newMove + 8; // Poisition new one
-            piece->position = piece->position - 8; // updates the piece position
-            break;
-        // Black Cases
-        case '5':
-            oldPosition = newMove - 16; // Position back two
-            piece->position = piece->position + 16; // updates the piece position
-            break;
-        case '6':
-            oldPosition = newMove - 8; // Position back two
-            piece->position = piece->position + 8; // updates the piece position
-            break;
+    int diff = piece->position - newMove;
+    
+    // checks if it is a valid move
+    if (diff == 8 || diff == 16){
+        oldPosition = newMove + diff; // Position back two
+        piece->position = piece->position - diff; // updates the piece position
+        board[newMove] = board[oldPosition];
+        board[oldPosition] = 0; // current becomes nothing
+    }else{
+        printf("Invalid Move\n");
     }
 
-    board[newMove] = board[oldPosition];
-    board[oldPosition] = 0; // current becomes nothing
 
-    // Code temp to move ponds at the start
-    // for (int i = 0; i < 4; i++){
-    //     cout << "Enter a move: ";
-    //     string coordinate;
-    //     cin >> coordinate;
-
-    //     movePondFirstMove(board,&tmp,coordinate);
-    //     printBoard(board);
-    // }
 }
 
-void movePiece(int* board, struct piece* piece, string move){
+void movePiece(int* board, struct piece *piece, string move){
     // Move any piece to the move
     int newMove = chessCoordinateToInt(move);
     int oldPosition;
@@ -229,7 +208,7 @@ void movePiece(int* board, struct piece* piece, string move){
     board[oldPosition] = 0; // current becomes nothing
 }
 
-void moveKnight(int* board, struct piece* piece, string move){
+void moveKnight(int* board, struct piece *piece, string move){
     // Reverse all the nums
     // knight possible moves
     // knight two up (-16) right -15 or left -17
@@ -253,7 +232,7 @@ void moveKnight(int* board, struct piece* piece, string move){
   
 }
 
-void moveRook(int* board, struct piece* piece, string move){
+void moveRook(int* board, struct piece *piece, string move){
     // move = f3, a2 etc
     int newMove = chessCoordinateToInt(move);
     int oldPosition;
@@ -272,11 +251,11 @@ void moveRook(int* board, struct piece* piece, string move){
     }
 }
 
-void moveBishop(int* board, struct piece* piece, string move){
+void moveBishop(int* board, struct piece *piece, string move){
     int newMove = chessCoordinateToInt(move);
     int oldPosition;
     int diff = piece->position - newMove;
-    
+    printf("%d\n", diff);
     // checks if it is a valid move
     if (diff % 9 == 0 || diff % 7 == 0){
         oldPosition = newMove + diff; // Position back two
@@ -353,9 +332,11 @@ int main(){
     initialize(board, whitePieces, blackPieces);
 
     struct piece tmp = whitePieces[10]; 
-    struct piece tmp2 = blackPieces[0];
+    struct piece tmp2 = blackPieces[2];
 
+    moveBishop(board, &tmp2, "e5");
     printBoard(board);
+
 
     return 0;
 }
